@@ -53,7 +53,7 @@ npm run build
 # 然后用 DSH 宿主的插件加载方式注入/组合本目录
 ```
 
-如需与本地 DSH monorepo 匹配（使用与宿主一致的 TypeScript 版本）：
+如需与本地 DSH monorepo 匹配：
 
 ```bash
 DSH_CHECKOUT=<path-to-dsh-checkout> bash scripts/build.sh
