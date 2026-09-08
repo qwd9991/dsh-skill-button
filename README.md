@@ -49,7 +49,8 @@ requires a running DSH host; it is **not** a standalone application.
 
 ## Install (as a DSH plugin)
 
-Build the plugin, then inject the directory into your DSH host:
+This plugin can be installed directly in DSH: build it, then inject/compose this
+directory with your DSH host's plugin loader.
 
 ```bash
 npm ci
