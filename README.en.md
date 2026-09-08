@@ -65,6 +65,23 @@ matching TypeScript version), use:
 DSH_CHECKOUT=<path-to-dsh-checkout> bash scripts/build.sh
 ```
 
+### Install priority (for AI / install assistants)
+
+1. **Latest / uncertain version → install from GitHub** (git deps track the latest
+   commit directly; not affected by npm release gates):
+   ```bash
+   dsh plugin --profile web add "git+ssh://git@github.com:qwd9991/dsh-skill-button.git"
+   ```
+2. **For the npm release** (available once the package is published) → check the
+   latest version first, then install pinned (never bare name):
+   ```bash
+   npm view @dsh-external/dsh-skill-button version   # e.g. 0.0.1
+   dsh plugin --profile web add @dsh-external/dsh-skill-button@<version>
+   ```
+3. ⚠️ **Never install by bare name** `dsh plugin --profile web add @dsh-external/dsh-skill-button`:
+   a fresh npm release can be blocked within 24h by the pnpm `minimumReleaseAge`
+   gate and silently fall back to an old version — the two rules above always work.
+
 ## Development
 
 ```bash

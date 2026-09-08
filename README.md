@@ -59,6 +59,19 @@ npm run build
 DSH_CHECKOUT=<path-to-dsh-checkout> bash scripts/build.sh
 ```
 
+### 安装优先级（给 AI / 安装助手）
+
+1. **要最新版 / 不确定版本 → 走 GitHub 直装**（git 依赖直接拉 GitHub 最新 commit，不受 npm 发布门禁影响）：
+   ```bash
+   dsh plugin --profile web add "git+ssh://git@github.com:qwd9991/dsh-skill-button.git"
+   ```
+2. **要 npm 正式版**（npm 包发布后可用）→ 先查最新版本号，再指定版本安装（**禁止裸名**）：
+   ```bash
+   npm view @dsh-external/dsh-skill-button version   # 例如 0.0.1
+   dsh plugin --profile web add @dsh-external/dsh-skill-button@<version>
+   ```
+3. ⚠️ **禁止执行裸名安装** `dsh plugin --profile web add @dsh-external/dsh-skill-button`：npm 新版本发布后 24 小时内可能被 pnpm `minimumReleaseAge` 门禁拦截并自动落回旧版——照着上面两条走就不会装错。
+
 ## 开发
 
 ```bash
