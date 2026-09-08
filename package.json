@@ -9,6 +9,14 @@
     "lib"
   ],
   "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwd9991/dsh-skill-button.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qwd9991/dsh-skill-button/issues"
+  },
+  "homepage": "https://github.com/qwd9991/dsh-skill-button#readme",
   "engines": {
     "node": ">=20"
   },

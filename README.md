@@ -1,6 +1,7 @@
 # dsh-skill-button
 
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/qwd9991/dsh-skill-button/ci.yml?branch=main)](https://github.com/qwd9991/dsh-skill-button/actions)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-green.svg)
 
 **DSH Input Box Multi-Select Skill Button Plugin** — a browser client panel that
