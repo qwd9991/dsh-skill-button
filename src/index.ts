@@ -1,9 +1,9 @@
 /**
- * @dsh-external/dsh-skill-picker — Host side entry point.
+ * @dsh-external/dsh-skill-button — Host side entry point.
  *
  * Exposes a translation endpoint backed by the user's configured DSH model
  * (the model selected in Settings / the composer model seat). The browser
- * client calls `POST /skill-picker/api/translate` for any skill not yet
+ * client calls `POST /skill-button/api/translate` for any skill not yet
  * translated; the host streams a translation from the configured LLM and
  * returns `{ zhName, zhDesc }`. If no model is configured or the LLM call
  * fails, the client falls back to its offline rule engine / free API.
@@ -11,7 +11,7 @@
 import type { Context } from 'cordis'
 import { BlockAssembler, createUserMessage } from '@deepseek-ai/dsh-llm'
 
-export const name = "@dsh-external/dsh-skill-picker"
+export const name = "@dsh-external/dsh-skill-button"
 
 export const inject = ['llm', 'agentDefaultModel', 'webServer'] as const
 
@@ -102,7 +102,7 @@ export function apply(ctx: AppContext): void {
   ctx.effect(() => {
     const d = ctx.webServer.register({
       kind: 'prefix',
-      path: '/skill-picker/api/translate',
+      path: '/skill-button/api/translate',
       handler: async (req: any, res: any) => {
         const json = (body: unknown, code = 200) => {
           res.writeHead(code, { 'content-type': 'application/json; charset=utf-8' })
@@ -149,7 +149,7 @@ export function apply(ctx: AppContext): void {
           return json({ ok: false, error: error instanceof Error ? error.message : String(error) })
         }
       },
-    }, 'skill-picker: translate api')
+    }, 'skill-button: translate api')
     return () => d()
   })
 }

@@ -16,6 +16,6 @@ public disclosure.
 ## Scope
 
 This plugin runs inside a DSH host and exposes a translation API endpoint
-(`POST /skill-picker/api/translate`) that calls the user's configured model.
+(`POST /skill-button/api/translate`) that calls the user's configured model.
 It does not authenticate callers in the current version — do not expose the
 host's API surface to untrusted networks without authentication in front of it.

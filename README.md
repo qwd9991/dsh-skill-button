@@ -1,9 +1,9 @@
-# dsh-skill-picker
+# dsh-skill-button
 
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-green.svg)
 
-**DSH Input Box Multi-Select Skill Picker Plugin** — a browser client panel that
+**DSH Input Box Multi-Select Skill Button Plugin** — a browser client panel that
 lets you select multiple agent skills and insert them into the DSH composer,
 plus smart translation of skill names/descriptions.
 
@@ -18,7 +18,7 @@ requires a running DSH host; it is **not** a standalone application.
   already present in the composer.
 - Search, favorites (persisted in `localStorage`), and "already selected" tagging.
 - Optional Chinese translation of skill names/descriptions:
-  1. host model endpoint (`POST /skill-picker/api/translate`, uses the model
+  1. host model endpoint (`POST /skill-button/api/translate`, uses the model
      selected in Settings / composer seat),
   2. offline rule dictionary (kebab-case word → zh-CN),
   3. free [MyMemory API](https://mymemory.translated.net) fallback (only when
@@ -82,12 +82,12 @@ enable it. Client state (favorites, translation cache) stays in `localStorage`.
 
 ## 中文说明
 
-`dsh-skill-picker` 是 DeepSeek DSH 输入框多选技能选择插件：在输入框左侧注入
+`dsh-skill-button` 是 DeepSeek DSH 输入框多选技能选择插件：在输入框左侧注入
 「技能」按钮，弹出多选面板，把选中的技能以 `/skill-name` 形式插入输入框，
 并可为技能名称/描述提供中文翻译。
 
 - 技能列表实时取自宿主（`remote.skills.list`），支持搜索、收藏置顶、跳过已在输入框中的技能。
-- 翻译默认关闭；开启后优先使用宿主配置模型（`/skill-picker/api/translate`），
+- 翻译默认关闭；开启后优先使用宿主配置模型（`/skill-button/api/translate`），
   宿主模型不可用时，描述会发送至第三方免费翻译服务 MyMemory（详见上方 Privacy）。
 - 构建：`npm ci && npm run build`（只需公共 npm 包）；如需与本地 DSH monorepo
   匹配，改用 `DSH_CHECKOUT=<checkout> bash scripts/build.sh`。

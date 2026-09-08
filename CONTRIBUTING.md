@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in dsh-skill-picker!
+Thanks for your interest in dsh-skill-button!
 
 ## Requirements
 

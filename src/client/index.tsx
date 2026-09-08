@@ -134,7 +134,7 @@ function focusComposerEnd() {
         textarea.setSelectionRange(len, len)
       }
     } catch (e) {
-      console.warn('[skill-picker] focusComposerEnd error:', e)
+      console.warn('[skill-button] focusComposerEnd error:', e)
     }
   }, 40)
 }
@@ -183,7 +183,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
       //    configured DSH model (the model shown in Settings / composer seat).
       if (isSubscribed) {
         try {
-          const res = await fetch('/skill-picker/api/translate', {
+          const res = await fetch('/skill-button/api/translate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: skill.name, description: skill.description, sessionId }),
@@ -196,7 +196,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
             }
           }
         } catch (e) {
-          console.warn('[skill-picker] host translate fallback for:', skill.name, e)
+          console.warn('[skill-button] host translate fallback for:', skill.name, e)
         }
       }
 
@@ -238,7 +238,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
             }
           }
         } catch (e) {
-          console.warn('[skill-picker] free translation fallback for:', skill.name, e)
+          console.warn('[skill-button] free translation fallback for:', skill.name, e)
         }
       }
 
@@ -291,7 +291,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
       try {
         localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(Array.from(next)))
       } catch (err) {
-        console.warn('[skill-picker] failed to save favorites:', err)
+        console.warn('[skill-button] failed to save favorites:', err)
       }
       return next
     })
@@ -316,7 +316,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
           }
         }
       } catch (e) {
-        console.warn('[skill-picker] dynamic skill list fetch failed:', e)
+        console.warn('[skill-button] dynamic skill list fetch failed:', e)
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -412,7 +412,7 @@ function SkillPickerButton({ ctx, sessionId }: { ctx: any; sessionId?: string })
           if (res === true) inserted = true
         }
       } catch (e) {
-        console.warn('[skill-picker] actx insert failed:', e)
+        console.warn('[skill-button] actx insert failed:', e)
       }
     }
 
@@ -854,12 +854,12 @@ export function apply(ctx: any): void {
       ctx.slots.register(
         {
           name: 'conversation.input.left',
-          id: '@dsh-external/dsh-skill-picker-button',
+          id: '@dsh-external/dsh-skill-button-button',
           order: -10,
           inject: (sessionId: string) => ({ ctx, sessionId }),
         },
         SkillPickerButton,
       ),
     )
-  }, '@dsh-external/dsh-skill-picker: input button')
+  }, '@dsh-external/dsh-skill-button: input button')
 }
