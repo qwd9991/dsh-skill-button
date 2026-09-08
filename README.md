@@ -1,0 +1,94 @@
+# dsh-skill-picker
+
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
+![Node](https://img.shields.io/badge/node-%3E%3D20-green.svg)
+
+**DSH Input Box Multi-Select Skill Picker Plugin** — a browser client panel that
+lets you select multiple agent skills and insert them into the DSH composer,
+plus smart translation of skill names/descriptions.
+
+This is a plugin for [DeepSeek DSH](https://github.com/deepseek-ai) hosts. It
+requires a running DSH host; it is **not** a standalone application.
+
+## Features
+
+- Injects a skill button into the DSH input box (`conversation.input.left` slot).
+- Lists installed skills from the host (`remote.skills.list`) with live refresh.
+- Multi-select and bulk-insert as `/skill-name /skill-name …`, skipping skills
+  already present in the composer.
+- Search, favorites (persisted in `localStorage`), and "already selected" tagging.
+- Optional Chinese translation of skill names/descriptions:
+  1. host model endpoint (`POST /skill-picker/api/translate`, uses the model
+     selected in Settings / composer seat),
+  2. offline rule dictionary (kebab-case word → zh-CN),
+  3. free [MyMemory API](https://mymemory.translated.net) fallback (only when
+     translation is enabled and the host model is unavailable).
+
+## Requirements
+
+- Node.js >= 20 (`.nvmrc`).
+- A DSH host that exposes `llm`, `agentDefaultModel`, `webServer`, and the
+  client side `slots` / `remote.skills` / `sessions` services.
+- Peer packages (`@deepseek-ai/dsh-llm`, `@deepseek-ai/dsh-tools`,
+  `@deepseek-ai/dsh-client-ui-slots`, `cordis`, `schemastery`) are mirrored in
+  `devDependencies` for development; all of them are published on the public
+  npm registry.
+
+## Install (as a DSH plugin)
+
+Build the plugin, then inject the directory into your DSH host:
+
+```bash
+npm ci
+npm run build
+# then inject/compose this directory via your DSH host's plugin loader
+```
+
+For DSH monorepo compatibility (building against a local dsh checkout with a
+matching TypeScript version), use:
+
+```bash
+DSH_CHECKOUT=<path-to-dsh-checkout> bash scripts/build.sh
+```
+
+## Development
+
+```bash
+npm ci
+npm run typecheck   # strict TS check against public npm packages
+npm run build       # tsc (src → lib/) + tsdown client bundle
+npm run check:public # fail if host-only paths/credentials sneak into src or scripts
+```
+
+## Privacy
+
+When the translation toggle is **on**, skill names and descriptions of
+uncached skills are sent to the host's configured model. If the host model is
+unavailable, descriptions may be sent to the third-party free translation
+service `api.mymemory.translated.net` (which retains logs for a limited time).
+Translation is **off** by default; there is no third-party call unless you
+enable it. Client state (favorites, translation cache) stays in `localStorage`.
+
+## License
+
+[BSD-3-Clause](LICENSE).
+
+## Acknowledgments
+
+- Built as a DSH plugin using `@deepseek-ai` packages.
+- Free translation fallback provided by MyMemory.
+
+---
+
+## 中文说明
+
+`dsh-skill-picker` 是 DeepSeek DSH 输入框多选技能选择插件：在输入框左侧注入
+「技能」按钮，弹出多选面板，把选中的技能以 `/skill-name` 形式插入输入框，
+并可为技能名称/描述提供中文翻译。
+
+- 技能列表实时取自宿主（`remote.skills.list`），支持搜索、收藏置顶、跳过已在输入框中的技能。
+- 翻译默认关闭；开启后优先使用宿主配置模型（`/skill-picker/api/translate`），
+  宿主模型不可用时，描述会发送至第三方免费翻译服务 MyMemory（详见上方 Privacy）。
+- 构建：`npm ci && npm run build`（只需公共 npm 包）；如需与本地 DSH monorepo
+  匹配，改用 `DSH_CHECKOUT=<checkout> bash scripts/build.sh`。
+- 许可证：BSD-3-Clause。

@@ -1,0 +1,12 @@
+node_modules/
+lib/
+*.tsbuildinfo
+*.tgz
+*.tar.gz
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+coverage/
+dist/

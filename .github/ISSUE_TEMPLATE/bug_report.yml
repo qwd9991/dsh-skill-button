@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a problem with dsh-skill-picker
+title: '[bug] '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please fill in the details below.
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH version
+      description: Which DSH host version are you running?
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Steps to reproduce, expected result, actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / console output
+      render: shell

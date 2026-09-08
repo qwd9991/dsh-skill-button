@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build (tsc + client bundle)
+        run: npm run build
+
+      - name: Forbid host-only paths in build output
+        run: npm run check:public
+
+      - name: Assert built entry points exist
+        run: |
+          test -f lib/index.js
+          test -f lib/client.js
+          test -f lib/types/index.d.ts
+          echo "entry points OK"
