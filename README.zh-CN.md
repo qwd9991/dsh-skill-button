@@ -24,6 +24,16 @@ DSH 宿主；它**不是**独立应用。
   3. 免费 [MyMemory API](https://mymemory.translated.net) 降级
      （仅在开启翻译且宿主模型不可用时）。
 
+## 界面截图
+
+| 默认视图（翻译关闭） | 翻译开启 |
+| --- | --- |
+| ![技能选择](docs/images/skill-button-overview.png) | ![翻译后技能名](docs/images/skill-button-translate-on.png) |
+
+| 多选状态 | 搜索 |
+| --- | --- |
+| ![选中技能](docs/images/skill-button-selected.png) | ![搜索技能](docs/images/skill-button-search.png) |
+
 ## 环境要求
 
 - Node.js >= 20（见 `.nvmrc`）。

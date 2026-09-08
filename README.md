@@ -27,6 +27,16 @@ requires a running DSH host; it is **not** a standalone application.
   3. free [MyMemory API](https://mymemory.translated.net) fallback (only when
      translation is enabled and the host model is unavailable).
 
+## Screenshots
+
+| Default view | Translation ON |
+| --- | --- |
+| ![Skill selector](docs/images/skill-button-overview.png) | ![Translated skill names](docs/images/skill-button-translate-on.png) |
+
+| Multi-select | Search |
+| --- | --- |
+| ![Selected skills](docs/images/skill-button-selected.png) | ![Search skills](docs/images/skill-button-search.png) |
+
 ## Requirements
 
 - Node.js >= 20 (`.nvmrc`).
